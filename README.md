@@ -31,6 +31,56 @@ if (source == null)
 if (x == y) x = 5;
 ```
 
+### Use the following `switch` style. Be consistent across the entire `switch`.
+```C#
+// Good
+switch (type)
+{
+    case Type.Foo: return new Foo();
+    case Type.Bar: return new Bar();
+    default: throw NotImplementedException("Nooooo!");
+}
+
+switch (type)
+{
+    case Type.Foo: // Don't use compact style here -- since other cases can't
+        return new Foo();
+
+    case Type.Bar:
+        thing = new Bar();
+        break;
+
+    case Type.Baz:
+        if (bad) break;
+        thing = new Baz();
+        break;
+
+    default:
+        throw NotImplementedException("Nooooo!");
+}
+
+// Bad
+switch (type)
+{
+    case Type.Foo: return new Foo();
+    case Type.Bar:
+        if (bad) break;;
+        return new Bar();
+    default: throw NotImplementedException("Nooooo!");
+}
+
+switch (type)
+{
+    case Type.Bar:
+    {
+        if (bad) break;;
+        return new Bar();
+    }
+    default:
+        throw NotImplementedException("Nooooo!");
+}
+```
+
 ###Use four spaces of indentation (no tabs).
 
 ###Use `camelCase` to name all local variables.

@@ -182,10 +182,20 @@ new Foo
         FooBarBaz = "FooBarBaz"
     };
 
+var list = items.Where(_ => _.Value > 5).Select(_ => new { _.Id, _.Name });
+
+var list = items.Where(_ => _.Value > 5)
+                .OrderBy(_ => _.Rate)
+                .Select(_ => new { _.Id, _.Name });
+
 // Bad
 if(var) return;
 
 new Foo{Bar="Bar"};
+
+var list = items.Where(_ => _.Value > 5)
+    .OrderBy(_ => _.Rate)
+    .Select(_ => new { _.Id, _.Name });
 ```
 
 ###Avoid more than one empty line at any time. For example, do not have two blank lines between members of a type.

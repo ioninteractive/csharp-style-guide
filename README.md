@@ -59,21 +59,49 @@ switch (type)
         throw NotImplementedException("Nooooo!");
 }
 
+// use brackets if new scope is needed, but be consistent for all multi-line cases
+switch (type)
+{
+    case Type.Foo: // Don't use compact style here -- since other cases can't
+        return new Foo();
+
+    case Type.Bar:
+    {
+        var thing = new Bar();
+        thing.Foo();
+        break;
+    }
+    case Type.Baz:
+    {
+        if (bad) break;
+        var thing = new Baz();
+        thing.Bar();
+        break;
+    }
+
+    default:
+        throw NotImplementedException("Nooooo!");
+}
+
 // Bad
 switch (type)
 {
     case Type.Foo: return new Foo();
     case Type.Bar:
-        if (bad) break;;
+        if (bad) break;
         return new Bar();
     default: throw NotImplementedException("Nooooo!");
 }
 
 switch (type)
 {
+    case Type.Foo: 
+        if (good) break;
+        return new Foo();
+        
     case Type.Bar:
     {
-        if (bad) break;;
+        if (bad) break;
         return new Bar();
     }
     default:
